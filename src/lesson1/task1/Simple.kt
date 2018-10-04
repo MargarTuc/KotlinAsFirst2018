@@ -1,6 +1,7 @@
 @file:Suppress("UNUSED_PARAMETER")
 package lesson1.task1
 
+import java.lang.Math.pow
 import kotlin.math.*
 
 /**
@@ -67,8 +68,8 @@ fun seconds(hours: Int, minutes: Int, seconds: Int): Int = hours * 3600 + minute
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = (sagenes * 48.0 * 4.445 +
-        arshins * 48.0 * 4.445 / 3.0 + vershoks * 4.445) / 100.0
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double = (sagenes * 48 * 4.445 +
+        arshins * 48 * 4.445 / 3 + vershoks * 4.445) / 100.0
 
 /**
  * Тривиальная
@@ -112,9 +113,7 @@ fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minute
  * Сколько денег будет на счету через 3 года (с учётом сложных процентов)?
  * Например, 100 рублей под 10% годовых превратятся в 133.1 рубля
  */
-fun accountInThreeYears(initial: Int, percent: Int): Double = (((initial + (initial * percent / 100.0))
-        * percent / 100.0 + (initial + (initial * percent / 100.0))) * percent / 100.0 +
-        ((initial + (initial * percent / 100.0)) * percent / 100.0 + (initial + (initial * percent / 100.0))))
+fun accountInThreeYears(initial: Int, percent: Int): Double = initial * pow((percent / 100.0 + 1), 3.0)
 
 /**
  * Простая
