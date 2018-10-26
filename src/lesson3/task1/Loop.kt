@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 import kotlin.math.sqrt
@@ -38,7 +39,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -66,7 +67,15 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun digitNumber(n: Int): Int = TODO()
+fun digitNumber(n: Int): Int {
+    var count = 0
+    var number = n
+    do {
+        number /= 10
+        count++
+    } while (number != 0)
+    return count
+}
 
 /**
  * Простая
@@ -89,14 +98,31 @@ fun lcm(m: Int, n: Int): Int = TODO()
  *
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
-fun minDivisor(n: Int): Int = TODO()
+fun minDivisor(n: Int): Int {
+    var mindiv = 1
+    for (i in 2..n) {
+        if (n % i == 0) {
+            mindiv = i
+            break
+        }
+    }
+    return mindiv
+}
 
 /**
  * Простая
  *
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
-fun maxDivisor(n: Int): Int = TODO()
+fun maxDivisor(n: Int): Int {
+    var mindiv = 1
+    for (i in 1 until n) {
+        if (n % i == 0) {
+            mindiv = i
+        }
+    }
+    return mindiv
+}
 
 /**
  * Простая
@@ -191,7 +217,24 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var number = 1
+    var count = 0
+    var sqr = 1
+    while (count < n) {
+        sqr = number * number
+        count += digitNumber(sqr)
+        number += 1
+    }
+    if (count > n) {
+        while (count != n) {
+            count -= 1
+            sqr /= 10
+        }
+        sqr %= 10
+    } else sqr %= 10
+    return sqr
+}
 
 /**
  * Сложная
