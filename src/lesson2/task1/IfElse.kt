@@ -2,6 +2,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import kotlin.math.*
 
 /**
@@ -100,12 +101,7 @@ fun timeForHalfWay(t1: Double, v1: Double,
  */
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
-                       rookX2: Int, rookY2: Int): Int = when {
-    (kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2) -> 3
-    kingX == rookX1 || kingY == rookY1 -> 1
-    kingX == rookX2 || kingY == rookY2 -> 2
-    else -> 0
-}
+                       rookX2: Int, rookY2: Int): Int = TODO()
 
 /**
  * Простая
@@ -119,12 +115,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = when {
-    (kingX == rookX || kingY == rookY) && (abs(kingX - bishopX) == abs(kingY - bishopY)) -> 3
-    abs(kingX - bishopX) == abs(kingY - bishopY) -> 2
-    kingX == rookX || kingY == rookY -> 1
-    else -> 0
-}
+                          bishopX: Int, bishopY: Int): Int = TODO()
 
 /**
  * Простая
@@ -135,32 +126,14 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double): Int {
-    var be = 0.0
-    var were = 0.0
-    var been = 0.0
-    if (a >= b && a >= c) {
-        were = a
-        be = b
-        been = c
-    }
-    if (b >= a && b >= c) {
-        were = b
-        be = a
-        been = c
-    }
-    if (c >= b && c >= a) {
-        were = c
-        be = b
-        been = a
-    }
-    if (were >= be + been) return -1
+    val max = maxOf(a, b, c)
+    if (max > (a + b + c) - max) return -1
     return when {
-        be * be + been * been > were * were -> 0
-        be * be + been * been == were * were -> 1
+        ((sqr(a) + sqr(b) > sqr(c)) && (sqr(a) + sqr(c) > sqr(b)) && (sqr(c) + sqr(b) > sqr(a))) -> 0
+        ((sqr(a) + sqr(b) == sqr(c)) || (sqr(a) + sqr(c) == sqr(b)) || (sqr(c) + sqr(b) == sqr(a))) -> 1
         else -> 2
     }
 }
-
 /**
  * Средняя
  *
