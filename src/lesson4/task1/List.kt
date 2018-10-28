@@ -76,7 +76,7 @@ fun invertPositives(list: MutableList<Int>) {
  */
 fun squares(list: List<Int>) = list.map { it * it }
 
-/**
+/**л
  * Пример
  *
  * Из имеющихся целых чисел, заданного через vararg-параметр, сформировать массив их квадратов

@@ -99,8 +99,10 @@ fun lcm(m: Int, n: Int): Int = TODO()
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
+    if (isPrime(n))
+        return n
     var mindiv = 1
-    for (i in 2..n) {
+    for (i in 2..n / 2) {
         if (n % i == 0) {
             mindiv = i
             break
@@ -226,13 +228,11 @@ fun squareSequenceDigit(n: Int): Int {
         count += digitNumber(sqr)
         number += 1
     }
-    if (count > n) {
-        while (count != n) {
-            count -= 1
-            sqr /= 10
-        }
-        sqr %= 10
-    } else sqr %= 10
+    while (count != n) {
+        count -= 1
+        sqr /= 10
+    }
+    sqr %= 10
     return sqr
 }
 
