@@ -100,6 +100,7 @@ fun isPalindrome(str: String): Boolean {
     return true
 }
 
+
 /**
  * Пример
  *
