@@ -3,8 +3,7 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
-import kotlin.math.abs
-import kotlin.math.sqrt
+import kotlin.math.*
 
 /**
  * Пример
@@ -68,5 +67,5 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     val max = maxOf(a, b, c)
     val min = minOf(a, b, c)
     val ave = a + b + c - (min + max)
-    return ((min <= r) && (ave <= s)) || ((min <= s) && (ave <= r))
+    return ((min <= min(r, s)) && (ave <= max(r, s)))
 }
