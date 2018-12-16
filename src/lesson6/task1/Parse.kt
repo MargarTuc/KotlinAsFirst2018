@@ -84,7 +84,6 @@ fun dateStrToDigit(str: String): String = TODO()
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String = TODO()
-
 /**
  * Средняя
  *
