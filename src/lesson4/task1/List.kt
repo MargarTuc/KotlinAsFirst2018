@@ -248,8 +248,8 @@ fun russian(n: Int): String {
     val tenss = listOf<String>("", "", "двадцать ", "тридцать ", "сорок ", "пятьдесят ", "шестьдесят ", "семьдесят ",
             "восемьдесят ", "девяносто ")
     val ones = listOf<String>("", "", "", "три ", "четыре ", "пять ", "шесть ", "семь ", "восемь ", "девять ")
-    fun labuda(lab: Int, ku: Int): String {
-        var n2 = lab
+    fun strBuild(num: Int, check: Boolean): String {
+        var n2 = num
         val builder = StringBuilder()
         builder.append(hundreds[n2 / 100])
         n2 %= 100
@@ -258,15 +258,15 @@ fun russian(n: Int): String {
         if ((n2 % 100) > 19 || (n2 % 100) < 10)
             builder.append(when (n2 % 10) {
                 1 -> {
-                    if (ku == 1) "одна " else "один "
+                    if (check) "одна " else "один "
                 }
                 2 -> {
-                    if (ku == 1) "две " else "два "
+                    if (check) "две " else "два "
                 }
                 else -> ones[n2 % 10]
             }
             )
-        if (ku == 1) {
+        if (check) {
             builder.append(if (n2 % 100 !in 10..19) {
                 when (n2 % 10) {
                     1 -> "тысяча "
@@ -280,6 +280,6 @@ fun russian(n: Int): String {
         }
         return builder.toString()
     }
-    return if (n / 1000 > 0) (labuda(n / 1000, 1) + labuda(n % 1000, 0)).trim()
-    else labuda(n, 0).trim()
+    return if (n / 1000 > 0) (strBuild(n / 1000, true) + strBuild(n % 1000, false)).trim()
+    else strBuild(n, false).trim()
 }
