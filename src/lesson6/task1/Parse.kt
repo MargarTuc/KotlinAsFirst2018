@@ -208,18 +208,20 @@ fun fromRoman(roman: String): Int = TODO()
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
     val massiv = Array(cells) { 0 }
     var number = cells / 2
-    var brackets = 0
+    var bracketL = 0
+    var bracketR = 0
     var i = 0
     var limit2 = limit
     var n = 1
     while (i < commands.length) {
         when {
-            commands[i] == '[' -> brackets++
-            commands[i] == ']' -> brackets--
+            commands[i] == '[' -> bracketL++
+            commands[i] == ']' -> bracketR++
         }
+        if (bracketL < bracketR) throw IllegalArgumentException()
         i++
     }
-    if (brackets != 0) throw IllegalArgumentException()
+    if (bracketL != bracketR) throw IllegalArgumentException()
     i = 0
     while (i < commands.length && limit2 != 0) {
         when (commands[i]) {
