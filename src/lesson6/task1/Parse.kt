@@ -208,18 +208,18 @@ fun fromRoman(roman: String): Int = TODO()
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
     val massiv = Array(cells) { 0 }
     var number = cells / 2
-    var left = 0
-    var right = 0
+    var brackets = 0
     var i = 0
     var limit2 = limit
     var n = 1
     while (i < commands.length) {
-        if (commands[i] == '[') left++
-        if (commands[i] == ']') right++
-        if (right > left) throw IllegalArgumentException()
+        when {
+            commands[i] == '[' -> brackets++
+            commands[i] == ']' -> brackets--
+        }
         i++
     }
-    if (left != right) throw IllegalArgumentException()
+    if (brackets != 0) throw IllegalArgumentException()
     i = 0
     while (i < commands.length && limit2 != 0) {
         when (commands[i]) {
@@ -233,8 +233,10 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                     n = 1
                     while (n > 0) {
                         i++
-                        if (commands[i] == '[') n++
-                        if (commands[i] == ']') n--
+                        when {
+                            commands[i] == '[' -> n++
+                            commands[i] == ']' -> n--
+                        }
                     }
                 }
             }
@@ -243,8 +245,10 @@ fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
                     n = 1
                     while (n > 0) {
                         i--
-                        if (commands[i] == ']') n++
-                        if (commands[i] == '[') n--
+                        when {
+                            commands[i] == ']' -> n++
+                            commands[i] == '[' -> n--
+                        }
                     }
                 }
             }
