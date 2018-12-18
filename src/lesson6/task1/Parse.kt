@@ -49,12 +49,10 @@ fun main(args: Array<String>) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
             println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
-        }
-        else {
+        } else {
             println("Прошло секунд с начала суток: $seconds")
         }
-    }
-    else {
+    } else {
         println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
@@ -84,6 +82,7 @@ fun dateStrToDigit(str: String): String = TODO()
  * входными данными.
  */
 fun dateDigitToStr(digital: String): String = TODO()
+
 /**
  * Средняя
  *
@@ -207,7 +206,54 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> {
-    for (char in commands) {
-        while ()
+    val massiv = Array(cells) { 0 }
+    var number = cells / 2
+    var left = 0
+    var right = 0
+    var i = 0
+    var limit2 = limit
+    var n = 1
+    while (i < commands.length) {
+        if (commands[i] == '[') left++
+        if (commands[i] == ']') right++
+        if (right > left) throw IllegalArgumentException()
+        i++
     }
+    if (left != right) throw IllegalArgumentException()
+    i = 0
+    while (i < commands.length && limit2 != 0) {
+        when (commands[i]) {
+            ' ' -> print(' ')
+            '+' -> massiv[number]++
+            '-' -> massiv[number]--
+            '>' -> number++
+            '<' -> number--
+            '[' -> {
+                if (massiv[number] == 0) {
+                    n = 1
+                    while (n > 0) {
+                        i++
+                        if (commands[i] == '[') n++
+                        if (commands[i] == ']') n--
+                    }
+                }
+            }
+            ']' -> {
+                if (massiv[number] != 0) {
+                    n = 1
+                    while (n > 0) {
+                        i--
+                        if (commands[i] == ']') n++
+                        if (commands[i] == '[') n--
+                    }
+                }
+            }
+            else -> throw IllegalArgumentException()
+        }
+        i++
+        limit2--
+        if ((number >= cells) || (number < 0)) throw IllegalStateException()
+        if (limit2 == 0) return massiv.toList()
+    }
+    return massiv.toList()
 }
